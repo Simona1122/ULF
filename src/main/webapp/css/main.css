@@ -1,0 +1,28 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+div.headerDiv {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    border-bottom: solid black 3px;
+    padding: 5px;
+    background-color: white;
+    height: 40px;
+    background-color: beige;
+}
+
+div.navigationDiv {
+    float: left;
+}
+
+div.authenticationDiv {
+    float: right;
+}
+
+div.contentDiv {
+    top: 60px;
+    position: relative;
+}
