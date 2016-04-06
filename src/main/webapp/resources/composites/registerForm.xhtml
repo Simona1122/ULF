@@ -13,13 +13,13 @@
 
             <h:panelGrid columns="2">
                         <h:outputLabel class="formLabel" value="Username :"/>
-                        <h:inputText styleClass="formField"></h:inputText>
+                        <h:inputText styleClass="formField" value="#{registrationManagedBean.username}"></h:inputText>
                         <h:outputLabel class="formLabel">Password :</h:outputLabel>
-                        <h:inputSecret styleClass="formField"></h:inputSecret>
+                        <h:inputSecret styleClass="formField" value="#{registrationManagedBean.password}"></h:inputSecret>
                         <h:outputLabel class="formLabel">Repeat Password :</h:outputLabel>
-                        <h:inputSecret styleClass="formField"></h:inputSecret>
-                        <h:commandButton value="Register"></h:commandButton>
-                        <h:outputLabel class="formLabel" id="message"/>
+                        <h:inputSecret styleClass="formField" value="#{registrationManagedBean.repeatPassword}"></h:inputSecret>
+                        <h:commandButton value="Register" action="#{registrationManagedBean.register()}"></h:commandButton>
+                        <h:outputLabel class="formLabel" value="#{registrationManagedBean.message}" id="message"/>
 
             </h:panelGrid>
         </div>
