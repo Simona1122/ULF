@@ -18,8 +18,8 @@ import java.util.Properties;
  * Created by Nikola on 5.4.2016.
  */
 @Configuration
-@ComponentScan("com.pluripharm.deeplink")
-@EnableJpaRepositories("com.pluripharm.deeplink.data.repositories")
+@ComponentScan("rs.uns.dmi.ulf")
+@EnableJpaRepositories("rs.uns.dmi.ulf.data.repositories")
 public class SpringConfiguration {
 
     @Bean(name="transactionManager")
@@ -33,13 +33,14 @@ public class SpringConfiguration {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("com/pluripharm/deeplink/data/entities");
+        entityManagerFactoryBean.setPackagesToScan("rs.uns.dmi.ulf.data.entities");
 
         Properties jpaProperties = new Properties();
 
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         jpaProperties.put("hibernate.show_sql",false);
-        jpaProperties.setProperty("packagesToScan", "com.pluripharm.deeplink.data.entities");
+        jpaProperties.put("hibernate.hbm2ddl.auto","update");
+        jpaProperties.setProperty("packagesToScan", "rs.uns.dmi.ulf.data.entities");
 
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
@@ -51,7 +52,7 @@ public class SpringConfiguration {
         DataSource dataSource = null;
         JndiTemplate jndi = new JndiTemplate();
         try {
-            dataSource = (DataSource) jndi.lookup("java:comp/env/jdbc/DeeplinkDataSource");
+            dataSource = (DataSource) jndi.lookup("java:comp/env/jdbc/ulfDataSource");
         } catch (NamingException e) {
             e.printStackTrace();
         }
