@@ -19,18 +19,15 @@ public class RegistrationManagedBean {
 
     String username;
     String password;
-    String repeatPassword;
     String message;
 
-    public void register(){
-        UlfUser potentialDouble = userRepository.findByUserName(username);
-        if (potentialDouble == null){
-            potentialDouble = new UlfUser();
-            potentialDouble.setUserName(username);
-            potentialDouble.setPassword(password);
-            potentialDouble.setAdmin(false);
-            userRepository.save(potentialDouble);
-        }
+    public void register() {
+        UlfUser newUser = new UlfUser();
+        newUser.setUserName(username);
+        newUser.setPassword(password);
+        newUser.setAdmin(false);
+        userRepository.save(newUser);
+
     }
 
     public String getUsername() {
@@ -47,14 +44,6 @@ public class RegistrationManagedBean {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
     }
 
     public String getMessage() {

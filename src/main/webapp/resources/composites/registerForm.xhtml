@@ -4,6 +4,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:cc="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui"
         >
     <cc:interface>
         <!-- Define component attributes here -->
@@ -11,15 +12,27 @@
     <cc:implementation>
         <div class="horizontalCenter">
 
-            <h:panelGrid columns="2">
-                        <h:outputLabel class="formLabel" value="Username :"/>
-                        <h:inputText styleClass="formField" value="#{registrationManagedBean.username}"></h:inputText>
-                        <h:outputLabel class="formLabel">Password :</h:outputLabel>
-                        <h:inputSecret styleClass="formField" value="#{registrationManagedBean.password}"></h:inputSecret>
-                        <h:outputLabel class="formLabel">Repeat Password :</h:outputLabel>
-                        <h:inputSecret styleClass="formField" value="#{registrationManagedBean.repeatPassword}"></h:inputSecret>
-                        <h:commandButton value="Register" action="#{registrationManagedBean.register()}"></h:commandButton>
-                        <h:outputLabel class="formLabel" value="#{registrationManagedBean.message}" id="message"/>
+            <h:panelGrid columns="3">
+                <h:outputLabel class="formLabel" for="usernameField" value="Username :"/>
+                <h:inputText styleClass="formField" id="usernameField" value="#{registrationManagedBean.username}"
+                             required="true" requiredMessage="Korisnicko ime je obavezno" validator="#{uniqueUsernameValidator.validate}">
+                </h:inputText>
+                <h:message id="m1" for="usernameField" style="color:red"/>
+
+                <h:outputLabel class="formLabel" for="passwordField" value="Password :"/>
+                <p:password styleClass="formField" id="passwordField" value="#{registrationManagedBean.password}"
+                            match="repeatPasswordField" required="true" requiredMessage="Lozinka je obavezna">
+                    <f:validateLength minimum="8"/>
+                </p:password>
+                <h:message id="m2" for="passwordField" style="color:red"/>
+
+                <h:outputLabel class="formLabel" for="repeatPasswordField" value="Repeat Password :"/>
+                <p:password styleClass="formField" id="repeatPasswordField" required="true"
+                            requiredMessage="Lozinka je obavezna"></p:password>
+                <h:message id="m3" for="repeatPasswordField" style="color:red"/>
+
+                <h:commandButton value="Register" action="#{registrationManagedBean.register()}"></h:commandButton>
+                <h:outputLabel class="formLabel" value="#{registrationManagedBean.message}" id="message"/>
 
             </h:panelGrid>
         </div>
