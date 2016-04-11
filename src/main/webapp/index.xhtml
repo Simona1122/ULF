@@ -11,20 +11,20 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <f:view>
-    <h:form>
     <div id="wrapper">
-        <div class="headerDiv clearfix" >
+        <div class="headerDiv clearfix">
             <div class="navigationDiv">
                 navigation goes here
             </div>
             <div class="authenticationDiv">
-                authentication goes here
+                <composites:loginForm id="logIn"/>
             </div>
         </div>
         <div class="contentDiv">
-            <composites:registerForm rendered="#{navigationManagedBean.showingRegistration()}"/>
+            <h:form id="contentGroup">
+                <composites:registerForm rendered="#{navigationManagedBean.showingRegistration()}"/>
+            </h:form>
         </div>
     </div>
-    </h:form>
 </f:view>
 </html>

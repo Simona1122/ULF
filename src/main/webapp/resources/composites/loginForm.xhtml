@@ -1,0 +1,41 @@
+<ui:component
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:cc="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui"
+>
+    <cc:interface>
+        <!-- Define component attributes here -->
+    </cc:interface>
+    <cc:implementation>
+
+        <h:form id="logInGroup">
+            <h:panelGroup id="notLoggedInGroup" rendered="#{not loginBean.someoneIsLoggedIn()}">
+                <p:panelGrid columns="1">
+                    <p:panelGrid columns="2">
+                        <h:outputLabel value="Username" for="usernameLoginField"/>
+                        <h:inputText id="usernameLoginField" value="#{loginBean.username}"/>
+
+                        <h:outputLabel value="Password" for="passwordLoginField"/>
+                        <h:inputSecret id="passwordLoginField" value="#{loginBean.password}"/>
+
+                        <p:commandButton value="Login" action="#{loginBean.logIn()}" execute=":logIn:logInGroup" render=":logIn:logInGroup"/>
+                        <p:commandButton value="Register" action="#{navigationManagedBean.displayRegistration}"/>
+
+                    </p:panelGrid>
+
+                    <h:outputLabel value="#{loginBean.loginMessage}"/>
+                </p:panelGrid>
+            </h:panelGroup>
+
+            <h:panelGroup id="loggedInGroup" rendered="#{loginBean.someoneIsLoggedIn()}">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Zdravo, #{loginBean.loggedInUser.userName}.  "/>
+                    <h:commandLink value="LogOut" action="#{loginBean.logOut()}"/>
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:form>
+    </cc:implementation>
+</ui:component>
